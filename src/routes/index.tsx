@@ -4,6 +4,7 @@ import { categories, contact } from "@/lib/menu-data";
 import { MenuItemCard } from "@/components/menu/MenuItemCard";
 import { StickyNav } from "@/components/menu/StickyNav";
 import { Reveal } from "@/components/menu/Reveal";
+import { useLang } from "@/lib/i18n";
 
 const title = "Cannoli Foods — Burgers, Pizza & Coffee in Addis Ababa";
 const description =
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { lang, t } = useLang();
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${contact.lat},${contact.lng}`;
   return (
     <div className="min-h-screen pb-28 sm:pb-16">
       <header className="relative overflow-hidden px-5 pt-14 pb-12 text-center">
@@ -51,7 +54,7 @@ function Index() {
               rel="noopener noreferrer"
               className="bg-gradient-warm text-primary-foreground card-lift inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold"
             >
-              <MessageCircle className="size-4" aria-hidden /> Order on WhatsApp
+              <MessageCircle className="size-4" aria-hidden /> {t("orderWhatsApp")}
             </a>
             <a
               href={contact.telegram}
@@ -59,20 +62,20 @@ function Index() {
               rel="noopener noreferrer"
               className="border-border bg-secondary card-lift inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold"
             >
-              <Send className="size-4" aria-hidden /> Telegram
+              <Send className="size-4" aria-hidden /> {t("orderTelegram")}
             </a>
           </div>
         </Reveal>
         <Reveal delay={220}>
           <div className="text-muted-foreground mt-7 flex flex-col items-center gap-2 text-sm">
             <span className="inline-flex items-center gap-2">
-              <Clock className="text-primary size-4" aria-hidden /> {contact.hours}
+              <Clock className="text-primary size-4" aria-hidden /> {t("openingHours")}: {contact.hours}
             </span>
             <span className="inline-flex items-center gap-2 text-center">
               <MapPin className="text-primary size-4 shrink-0" aria-hidden /> {contact.address}
             </span>
             <a href={contact.phoneHref} className="hover:text-foreground inline-flex items-center gap-2">
-              <Phone className="text-primary size-4" aria-hidden /> {contact.phone}
+              <Phone className="text-primary size-4" aria-hidden /> {t("callNow")}: {contact.phone}
             </a>
           </div>
         </Reveal>
@@ -89,6 +92,7 @@ function Index() {
                   {cat.emoji}
                 </span>
                 <h2 className="font-display text-4xl">{cat.label}</h2>
+                {null}
                 <span className="bg-border h-px flex-1" />
               </div>
             </Reveal>
