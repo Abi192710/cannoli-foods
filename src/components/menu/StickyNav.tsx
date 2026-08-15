@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { categories } from "@/lib/menu-data";
+import { useLang } from "@/lib/i18n";
 
 const firstId = categories[0]!.id;
 
 export function StickyNav() {
   const [active, setActive] = useState(firstId);
   const barRef = useRef<HTMLDivElement>(null);
+  const { lang, setLang } = useLang();
 
   useEffect(() => {
     const onScroll = () => {
@@ -36,10 +38,11 @@ export function StickyNav() {
 
   return (
     <div className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-xl">
-      <div
+      <div className="mx-auto flex max-w-5xl items-center gap-2 px-3">
+        <div
         ref={barRef}
-        className="mx-auto flex max-w-5xl gap-2 overflow-x-auto px-3 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+        className="flex min-w-0 flex-1 gap-2 overflow-x-auto py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
         {categories.map((c) => (
           <button
             key={c.id}
@@ -53,9 +56,17 @@ export function StickyNav() {
             }`}
           >
             <span aria-hidden>{c.emoji}</span>
-            {c.label}
+            {lang === "am" ? c.labelAm : c.label}
           </button>
         ))}
+        </div>
+        <button
+          onClick={() => setLang(lang === "en" ? "am" : "en")}
+          aria-label="Switch language"
+          className="border-border bg-secondary text-foreground hover:border-primary shrink-0 rounded-full border px-3 py-2 text-sm font-bold transition-colors"
+        >
+          {lang === "en" ? "አማ" : "EN"}
+        </button>
       </div>
     </div>
   );
