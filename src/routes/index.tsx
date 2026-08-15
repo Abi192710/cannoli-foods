@@ -91,8 +91,9 @@ function Index() {
                 <span className="text-3xl" aria-hidden>
                   {cat.emoji}
                 </span>
-                <h2 className="font-display text-4xl">{cat.label}</h2>
-                {null}
+                <h2 className="font-display text-4xl">
+                  {lang === "am" ? cat.labelAm : cat.label}
+                </h2>
                 <span className="bg-border h-px flex-1" />
               </div>
             </Reveal>
@@ -111,7 +112,17 @@ function Index() {
 
         <section className="scroll-mt-28 py-10">
           <Reveal>
-            <h2 className="font-display mb-5 text-4xl">Find Us</h2>
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <h2 className="font-display text-4xl">{t("contactUs")}</h2>
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-border bg-secondary card-lift inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold"
+              >
+                <MapPin className="size-4" aria-hidden /> {t("viewOnMap")}
+              </a>
+            </div>
             <div className="border-border overflow-hidden rounded-2xl border">
               <iframe
                 title="Cannoli Foods location map"
@@ -127,11 +138,18 @@ function Index() {
 
       <footer className="text-muted-foreground border-border mt-4 border-t px-5 py-8 text-center text-sm">
         <p className="font-display text-gradient-warm text-2xl">Cannoli Foods</p>
-        <p className="mt-2">{contact.address}</p>
-        <p>{contact.hours}</p>
+        <p className="mt-2">
+          {t("address")}: {contact.address}
+        </p>
+        <p>
+          {t("openingHours")}: {contact.hours}
+        </p>
         <a href={contact.phoneHref} className="hover:text-foreground mt-2 inline-block">
-          {contact.phone}
+          {t("phone")}: {contact.phone}
         </a>
+        <p className="mt-4 text-xs">
+          © {new Date().getFullYear()} Cannoli Foods — {t("rights")}
+        </p>
       </footer>
 
       <div className="from-background pointer-events-none fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t to-transparent p-4 pt-8 sm:hidden">
@@ -141,7 +159,7 @@ function Index() {
           rel="noopener noreferrer"
           className="bg-gradient-warm text-primary-foreground pointer-events-auto flex items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold shadow-[var(--shadow-lift)]"
         >
-          <MessageCircle className="size-5" aria-hidden /> Order on WhatsApp
+          <MessageCircle className="size-5" aria-hidden /> {t("orderWhatsApp")}
         </a>
       </div>
     </div>
