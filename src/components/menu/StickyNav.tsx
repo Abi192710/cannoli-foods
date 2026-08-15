@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { categories } from "@/lib/menu-data";
 
+const firstId = categories[0]!.id;
+
 export function StickyNav() {
-  const [active, setActive] = useState(categories[0].id);
+  const [active, setActive] = useState(firstId);
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
-      let current = categories[0].id;
+      let current = firstId;
       for (const c of categories) {
         const el = document.getElementById(c.id);
         if (el && el.getBoundingClientRect().top <= 160) current = c.id;
