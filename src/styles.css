@@ -6,7 +6,7 @@
 
 @theme {
   --font-display: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Barlow", "Noto Sans Ethiopic", ui-sans-serif, system-ui, sans-serif;
 }
 
 /*
