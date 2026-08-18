@@ -7,30 +7,56 @@ const firstId = categories[0]!.id;
 export function StickyNav() {
   const [active, setActive] = useState(firstId);
   const barRef = useRef<HTMLDivElement>(null);
+  const lockRef = useRef(false);
+  const lockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { lang, setLang } = useLang();
 
   useEffect(() => {
-    const onScroll = () => {
-      let current = firstId;
-      for (const c of categories) {
-        const el = document.getElementById(c.id);
-        if (el && el.getBoundingClientRect().top <= 160) current = c.id;
-      }
-      setActive(current);
+    const visible = new Set<string>();
+    const pick = () => {
+      if (lockRef.current) return;
+      let current: string | null = null;
+      for (const c of categories) if (visible.has(c.id)) { current = c.id; break; }
+      if (current) setActive(current);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target.id);
+          else visible.delete(e.target.id);
+        }
+        pick();
+      },
+      { rootMargin: "-100px 0px -60% 0px", threshold: 0 },
+    );
+    for (const c of categories) {
+      const el = document.getElementById(c.id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const btn = barRef.current?.querySelector<HTMLElement>(`[data-tab="${active}"]`);
-    btn?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const bar = barRef.current;
+    const btn = bar?.querySelector<HTMLElement>(`[data-tab="${active}"]`);
+    if (!bar || !btn) return;
+    const target = btn.offsetLeft - bar.clientWidth / 2 + btn.offsetWidth / 2;
+    const max = bar.scrollWidth - bar.clientWidth;
+    const left = Math.max(0, Math.min(target, max));
+    if (Math.abs(left - bar.scrollLeft) < 2) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    bar.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
   }, [active]);
 
   const go = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
+    lockRef.current = true;
+    setActive(id);
+    if (lockTimer.current) clearTimeout(lockTimer.current);
+    lockTimer.current = setTimeout(() => {
+      lockRef.current = false;
+    }, 900);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const top = el.getBoundingClientRect().top + window.scrollY - 112;
     window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
