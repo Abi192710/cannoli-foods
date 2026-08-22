@@ -15,6 +15,7 @@ export const strings = {
   address: { en: "Address", am: "አድራሻ" },
   phone: { en: "Phone", am: "ስልክ" },
   rights: { en: "All rights reserved", am: "መብቱ በህግ የተጠበቀ ነው" },
+  order: { en: "Order", am: "ዕቃ ይዘዙ" },
 } as const;
 
 export type StringKey = keyof typeof strings;
