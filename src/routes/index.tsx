@@ -152,16 +152,6 @@ function Index() {
         </p>
       </footer>
 
-      <div className="from-background pointer-events-none fixed inset-x-0 bottom-0 z-50 bg-gradient-to-t to-transparent p-4 pt-8 sm:hidden">
-        <a
-          href={contact.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-gradient-warm text-primary-foreground pointer-events-auto flex items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold shadow-[var(--shadow-lift)]"
-        >
-          <MessageCircle className="size-5" aria-hidden /> {t("order")}
-        </a>
-      </div>
     </div>
   );
 }
