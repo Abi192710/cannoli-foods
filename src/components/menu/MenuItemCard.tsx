@@ -1,6 +1,7 @@
 import { UtensilsCrossed, MessageCircle, Send } from "lucide-react";
 import type { MenuItem } from "@/lib/menu-data";
 import { Reveal } from "./Reveal";
+import { useLang } from "@/lib/i18n";
 
 export function MenuItemCard({
   item,
@@ -11,7 +12,12 @@ export function MenuItemCard({
   category: string;
   delay: number;
 }) {
-  const orderText = `Hi, I'd like to order: ${item.name} - ${item.price.toLocaleString()} ETB`;
+  const { lang } = useLang();
+  const itemName = lang === "am" && item.nameAm ? item.nameAm : item.name;
+  const orderText =
+    lang === "am"
+      ? `ሰላም፣ ይህን ማዘዝ እፈልጋለሁ፡ ${itemName} - ${item.price.toLocaleString()} ብር`
+      : `Hi, I'd like to order: ${itemName} - ${item.price.toLocaleString()} ETB`;
   const encoded = encodeURIComponent(orderText);
   const whatsappUrl = `https://wa.me/251922322507?text=${encoded}`;
   const telegramUrl = `https://t.me/Abi27j?text=${encoded}`;
