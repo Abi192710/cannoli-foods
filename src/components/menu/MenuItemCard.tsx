@@ -1,4 +1,4 @@
-import { UtensilsCrossed } from "lucide-react";
+import { UtensilsCrossed, MessageCircle, Send } from "lucide-react";
 import type { MenuItem } from "@/lib/menu-data";
 import { Reveal } from "./Reveal";
 
@@ -11,9 +11,14 @@ export function MenuItemCard({
   category: string;
   delay: number;
 }) {
+  const orderText = `Hi, I'd like to order: ${item.name} - ${item.price.toLocaleString()} ETB`;
+  const encoded = encodeURIComponent(orderText);
+  const whatsappUrl = `https://wa.me/251922322507?text=${encoded}`;
+  const telegramUrl = `https://t.me/Abi27j?text=${encoded}`;
+
   return (
     <Reveal delay={delay}>
-      <article className="card-lift group flex h-full gap-4 rounded-2xl border border-border bg-card p-3 sm:flex-col sm:gap-3 sm:p-4">
+      <article className="card-lift group relative flex h-full gap-4 rounded-2xl border border-border bg-card p-3 sm:flex-col sm:gap-3 sm:p-4">
         {item.image ? (
           <img
             src={item.image}
@@ -38,6 +43,29 @@ export function MenuItemCard({
           <p className="mt-1 font-display text-xl text-gradient-warm">
             {item.price.toLocaleString()} ETB
           </p>
+          <div className="mt-2 flex items-center gap-2">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Order ${item.name} on WhatsApp`}
+              title="Order on WhatsApp"
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-warm px-3 py-1.5 text-xs font-bold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <MessageCircle className="size-3.5" aria-hidden />
+              Order
+            </a>
+            <a
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Order ${item.name} on Telegram`}
+              title="Order on Telegram"
+              className="inline-flex items-center justify-center rounded-full border border-border bg-secondary p-1.5 text-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              <Send className="size-3.5" aria-hidden />
+            </a>
+          </div>
         </div>
       </article>
     </Reveal>
