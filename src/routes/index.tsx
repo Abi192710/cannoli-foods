@@ -159,7 +159,7 @@ function Index() {
           rel="noopener noreferrer"
           className="bg-gradient-warm text-primary-foreground pointer-events-auto flex items-center justify-center gap-2 rounded-full px-6 py-4 text-base font-bold shadow-[var(--shadow-lift)]"
         >
-          <MessageCircle className="size-5" aria-hidden /> {t("orderWhatsApp")}
+          <MessageCircle className="size-5" aria-hidden /> {t("order")}
         </a>
       </div>
     </div>

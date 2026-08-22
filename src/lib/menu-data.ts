@@ -36,7 +36,7 @@ import hotBuna from "@/assets/hot-buna.jpg";
 import hotTea from "@/assets/hot-tea.jpg";
 import hotChocolate from "@/assets/hot-chocolate.jpg";
 
-export type MenuItem = { name: string; price: number; image?: string };
+export type MenuItem = { name: string; price: number; image?: string; nameAm?: string };
 export type MenuCategory = {
   id: string;
   label: string;
