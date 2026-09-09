@@ -1,11 +1,11 @@
-import b1 from "@/assets/burger-1.jpg.asset.json";
-import b2 from "@/assets/burger-2.jpg.asset.json";
-import b3 from "@/assets/burger-3.jpg.asset.json";
-import b4 from "@/assets/burger-4.jpg.asset.json";
-import b5 from "@/assets/burger-5.jpg.asset.json";
-import b6 from "@/assets/burger-6.jpg.asset.json";
-import b7 from "@/assets/burger-7.jpg.asset.json";
-import b8 from "@/assets/burger-8.jpg.asset.json";
+import b1 from "@/assets/burger-1.jpg";
+import b2 from "@/assets/burger-2.jpg";
+import b3 from "@/assets/burger-3.jpg";
+import b4 from "@/assets/burger-4.jpg";
+import b5 from "@/assets/burger-5.jpg";
+import b6 from "@/assets/burger-6.jpg";
+import b7 from "@/assets/burger-7.jpg";
+import b8 from "@/assets/burger-8.jpg";
 import pizzaCannoli from "@/assets/pizza-cannoli.jpg";
 import pizzaMeat from "@/assets/pizza-meat.jpg";
 import pizzaMargarita from "@/assets/pizza-margarita.jpg";
@@ -52,15 +52,15 @@ export const categories: MenuCategory[] = [
     labelAm: "በርገር",
     emoji: "🍔",
     items: [
-      { name: "Addiction Burger", price: 913, image: b2.url },
-      { name: "Triple Cheese Burger", price: 1304, image: b3.url },
-      { name: "Double Cheeseburger", price: 1087, image: b4.url },
-      { name: "Cheese Burger", price: 739, image: b1.url },
-      { name: "Beef Burger", price: 687, image: b1.url },
-      { name: "BBQ Burger", price: 774, image: b5.url },
-      { name: "Chicken Burger", price: 783, image: b7.url },
-      { name: "Chicken Cheese Burger", price: 826, image: b6.url },
-      { name: "Double Chicken Cheese Burger", price: 1174, image: b8.url },
+      { name: "Addiction Burger", price: 913, image: b2 },
+      { name: "Triple Cheese Burger", price: 1304, image: b3 },
+      { name: "Double Cheeseburger", price: 1087, image: b4 },
+      { name: "Cheese Burger", price: 739, image: b1 },
+      { name: "Beef Burger", price: 687, image: b1 },
+      { name: "BBQ Burger", price: 774, image: b5 },
+      { name: "Chicken Burger", price: 783, image: b7 },
+      { name: "Chicken Cheese Burger", price: 826, image: b6 },
+      { name: "Double Chicken Cheese Burger", price: 1174, image: b8 },
     ],
   },
   {
